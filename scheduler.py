@@ -4,25 +4,12 @@ import urllib2
 import cookielib
 import urllib
 from ConfigParser import SafeConfigParser
-import logging
-import logging.handlers
 import aspect
 from apscheduler.schedulers.background import BackgroundScheduler
 import checkin
 import os
 import time
- 
 
-LOG_FILE = 'checkin.log'
-handler = logging.handlers.RotatingFileHandler(LOG_FILE, maxBytes = 1024*1024, backupCount = 5) 
-fmt = '%(asctime)s - %(filename)s:%(lineno)s - %(name)s - %(message)s'
-formatter = logging.Formatter(fmt)   
-handler.setFormatter(formatter)      
-logger = logging.getLogger('checkin')   
-logger.addHandler(handler)          
-logger.setLevel(logging.INFO)
-
-@aspect.timeit
 def maincheck():
     cfg = SafeConfigParser()
     cfg.read('checkinfo.cfg')
@@ -30,12 +17,14 @@ def maincheck():
     checkurl=cfg.get('urlinfo','checkurl')
     user=cfg.get('userinfo','username')
     password=cfg.get('userinfo','password')
-    logger.info('Start Check')   
-    data = checkIn(loginurl, checkurl,user,password)
-    logger.info('End Check')
+    print 'start'
+    data = checkin.checkIn(loginurl, checkurl,user,password)
+    print data
+    print 'End Check'
+
 
 def heart():
-    logger.info('Live')
+    pass
 
 if __name__ == '__main__':
     cfg = SafeConfigParser()

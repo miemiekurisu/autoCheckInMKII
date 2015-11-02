@@ -4,8 +4,6 @@ import urllib2
 import cookielib
 import urllib
 from ConfigParser import SafeConfigParser
-import logging
-import logging.handlers
 import aspect
 
 
@@ -41,6 +39,7 @@ def main():
     user=cfg.get('userinfo','username')
     password=cfg.get('userinfo','password')
     data = checkIn(loginurl, checkurl,user,password)
+    print data
     
 if __name__ == '__main__':
     main()

@@ -1,7 +1,5 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-import logging
-import logging.handlers
 import time
 
 def timeit(func):
